@@ -1,0 +1,22 @@
+greeting-service:
+  greeting: "Hello"
+  default-value: "Mundo"
+
+
+spring:
+  application:
+    name: greeting-service
+  config:
+    import: optional:configserver:http://localhost:8888/
+  cloud:
+    config:
+      profile: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+server:
+  port: 8080

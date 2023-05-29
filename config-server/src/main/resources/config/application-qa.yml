@@ -1,0 +1,14 @@
+greeting-service:
+  greeting: "Hello"
+  default-value: "qa"
+
+spring:
+  application:
+    name: greeting-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'

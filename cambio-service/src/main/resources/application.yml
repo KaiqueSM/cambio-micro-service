@@ -14,7 +14,8 @@ spring:
     show-sql: true
 
   flyway:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/}
-    schemas: cambio_service
-    username: ${DATABASE_USER:services_user}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cambio_service}
+    schemas: public
+    user: ${DATABASE_USER:services_user}
     password: ${DATABASE_PASSWORD:changeme}
+

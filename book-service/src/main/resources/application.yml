@@ -1,1 +1,6 @@
+server:
+  port: ${POST:8100}
 
+spring:
+  application:
+    name: book-service

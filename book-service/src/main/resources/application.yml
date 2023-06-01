@@ -4,3 +4,22 @@ server:
 spring:
   application:
     name: book-service
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/book_service}
+    username: ${DATABASE_USER:services_user}
+    password: ${DATABASE_PASSWORD:changeme}
+    driverClassName: org.postgresql.Driver
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      fail-on-empty-beans: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  flyway:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/book_service}
+    schemas: public
+    user: ${DATABASE_USER:services_user}
+    password: ${DATABASE_PASSWORD:changeme}

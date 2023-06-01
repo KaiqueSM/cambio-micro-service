@@ -2,17 +2,29 @@ package br.com.erudio.bookservice.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@Entity
 public class Book implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 180)
     private String author;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date launchDate;
+    @Column(nullable = false)
     private Double price;
+    @Column(nullable = false, length = 250)
     private String title;
+    @Transient
     private String currency;
+    @Transient
     private String environment;
 
     public Book() {

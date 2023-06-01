@@ -1,5 +1,20 @@
 server:
-  port: 8000
+  port: ${PORT:8000}
 spring:
   application:
     name: cambio-service
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cambio_service}
+    username: ${DATABASE_USER:services_user}
+    password: ${DATABASE_PASSWORD:changeme}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  flyway:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/}
+    schemas: cambio_service
+    username: ${DATABASE_USER:services_user}
+    password: ${DATABASE_PASSWORD:changeme}

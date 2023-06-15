@@ -19,3 +19,7 @@ spring:
     user: ${DATABASE_USER:services_user}
     password: ${DATABASE_PASSWORD:changeme}
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

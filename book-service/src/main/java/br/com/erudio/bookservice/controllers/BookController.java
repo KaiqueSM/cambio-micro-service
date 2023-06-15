@@ -2,6 +2,7 @@ package br.com.erudio.bookservice.controllers;
 
 import br.com.erudio.bookservice.model.Book;
 import br.com.erudio.bookservice.model.Cambio;
+import br.com.erudio.bookservice.proxy.CambioProxy;
 import br.com.erudio.bookservice.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -23,6 +24,8 @@ public class BookController {
     private Environment environment;
     @Autowired
     private BookRepository repository;
+    @Autowired
+    private CambioProxy proxy;
 
     @GetMapping(value = "/{id}/{currency}")
     public ResponseEntity<Book> findById(
@@ -34,18 +37,7 @@ public class BookController {
         if (book == null)
             throw new RuntimeException("Book not found");
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("amount",book.getPrice().toString());
-        params.put("from","USD");
-        params.put("to",currency);
-
-        Cambio cambio = new RestTemplate()
-                .getForEntity(
-                        "http://localhost:8000/cambio-service" +
-                                "/{amount}/{from}/{to}",
-                        Cambio.class,
-                        params
-                ).getBody();
+        Cambio cambio = proxy.getCambio(book.getPrice(), "USD", currency).getBody();
 
         book.setEnvironment(environment.getProperty(
                 "local.server.port"
